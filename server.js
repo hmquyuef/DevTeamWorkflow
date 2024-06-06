@@ -39,8 +39,15 @@ app.use(session({
     }
 }));
 
+function IsLogin(req, res, next){
+    if (req.session && req.session.user) {
+        return next();
+    }
+    return res.redirect('/login')
+};
+
 //#region Home Page
-app.get('/', (req, res) => res.sendFile(__dirname + '/src/index.html'));
+app.get('/', IsLogin, (req, res) => res.sendFile(__dirname + '/src/index.html'));
 app.get('/documentation', (req, res) => res.sendFile(__dirname + '/src/documentation.html'));
 //#endregion
 

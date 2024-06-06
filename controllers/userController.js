@@ -36,18 +36,10 @@ export async function Auth(req, res) {
 };
 
 export async function Logout(req, res){
+    //clean all cookies and session
     req.session.destroy();
+    res.clearCookie('Dev.Sid');
     return res.status(200).send('Logout successfully');
-};
-
-export async function IsLogin(req, res){
-    const { role } = req.body;
-    if (req.session.user) {
-        if (role && req.session.user.roles.includes(role)) 
-            return res.status(200).send(req.session.user);
-        return res.status(401).send('Unauthorized');
-    }
-    return res.status(404).send('Not found');
 };
 
 export async function GetListUsers(req, res){

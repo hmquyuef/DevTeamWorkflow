@@ -32,6 +32,7 @@ const login = () => {
             processData: false,
             data: jsonData ,
             success: function (data) {
+                console.log(data);
                 window.location.href = '/';
             },
             error: function (error) {
